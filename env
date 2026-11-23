@@ -1,0 +1,4 @@
+project=weather
+description=to display weather 
+docker_compose=true
+app=Node/nginx
