@@ -1,29 +1,18 @@
 # Weather Clock App
 
-تطبيق Node.js بيعرض الوقت والتاريخ والطقس مع خلفية متحركة (نجوم، قمر، سحاب، مطر...).
+A Node.js app that displays the current time, date, and weather.
 
-## التشغيل
-```
-npm start
-```
-وبعدين افتح: http://localhost:3000
-
-(محتاج Node.js 18 أو أحدث، ومفيش مكتبات محتاجة تتنزّل)
-
-## الهيكل
+## Structure
 ```
 weather-clock-app/
 ├── package.json
 ├── README.md
 ├── src/
-│   ├── index.js     السيرفر
-│   ├── config.js    المدن واللغات وألوان الطقس
-│   ├── weather.js   جلب الطقس
-│   └── page.js      صفحة الـ HTML
+│   ├── index.js     Server
+│   ├── config.js    Cities, languages, and weather colors
+│   ├── weather.js   Weather fetching
+│   └── page.js      HTML page
 └── public/
-    ├── style.css    التصميم
-    └── app.js       الساعة والمشهد (في المتصفح)
+    ├── style.css    Styling
+    └── app.js       Clock and scene (in the browser)
 ```
-
-## إضافة مدينة جديدة
-زوّد سطر في `CITIES` جوه `src/config.js`.
