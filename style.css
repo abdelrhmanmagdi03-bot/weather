@@ -1,0 +1,95 @@
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body {
+  overflow: hidden; color: #fff;
+  font-family: -apple-system, "SF Pro Display", system-ui, "Segoe UI", sans-serif;
+  background: linear-gradient(180deg,#05051a 0%,#16183a 45%,#2a2b55 70%,#14152e 100%);
+  transition: background 1.2s;
+}
+
+/* ===== المشهد (النجوم، القمر، السحاب، المطر) ===== */
+#scene { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+
+.star {
+  position: absolute; border-radius: 50%; background: #fff;
+  animation: twinkle 3s ease-in-out infinite;
+}
+@keyframes twinkle { 0%,100% { opacity: .25; } 50% { opacity: 1; } }
+
+.moon {
+  position: absolute; top: 9%; right: 14%; width: 96px; height: 96px; border-radius: 50%;
+  background:
+    radial-gradient(circle at 30% 35%, rgba(120,128,160,.55) 0 8%, transparent 9%),
+    radial-gradient(circle at 62% 55%, rgba(120,128,160,.45) 0 11%, transparent 12%),
+    radial-gradient(circle at 45% 78%, rgba(120,128,160,.4) 0 7%, transparent 8%),
+    radial-gradient(circle at 35% 30%, #f6f8ff, #c3c9e3 60%, #9aa1c4);
+  box-shadow: 0 0 40px 12px rgba(200,210,255,.28), 0 0 120px 40px rgba(160,175,255,.15);
+}
+.sun {
+  position: absolute; top: 8%; right: 14%; width: 110px; height: 110px; border-radius: 50%;
+  background: radial-gradient(circle, #fffbe0 0 35%, #ffe27a 60%, rgba(255,214,90,0) 72%);
+  box-shadow: 0 0 80px 30px rgba(255,226,122,.55);
+}
+
+.cloud {
+  position: absolute; left: 0; height: 90px; border-radius: 50%;
+  filter: blur(28px); animation: drift linear infinite;
+}
+.cloud.night { background: rgba(120,125,190,.38); }
+.cloud.day   { background: rgba(255,255,255,.55); }
+@keyframes drift { from { transform: translateX(-50vw); } to { transform: translateX(150vw); } }
+
+.drop {
+  position: absolute; top: -30px; width: 2px; height: 18px;
+  background: linear-gradient(transparent, rgba(255,255,255,.55));
+  animation: fall linear infinite;
+}
+.flake {
+  position: absolute; top: -10px; border-radius: 50%; background: rgba(255,255,255,.9);
+  animation: fall linear infinite;
+}
+@keyframes fall { to { transform: translateY(110vh); } }
+
+.flash {
+  position: absolute; inset: 0; background: #fff; opacity: 0;
+  animation: flash 7s infinite;
+}
+@keyframes flash {
+  0%,92%,100% { opacity: 0; } 93% { opacity: .5; } 94% { opacity: 0; } 95% { opacity: .35; } 97% { opacity: 0; }
+}
+
+/* ===== المحتوى ===== */
+main {
+  position: relative; z-index: 1; height: 100%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 70px 16px 24px; gap: 4px;
+  text-shadow: 0 2px 12px rgba(0,0,0,.25);
+}
+.controls {
+  position: fixed; top: 14px; left: 50%; transform: translateX(-50%);
+  z-index: 2; display: flex; gap: 8px;
+}
+select {
+  padding: 8px 14px; border-radius: 999px; border: 1px solid rgba(255,255,255,.2);
+  background: rgba(255,255,255,.15); color: #fff; font-size: 1rem;
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+}
+select option { color: #000; }
+
+#city { font-size: 2.4rem; font-weight: 400; margin: 0; }
+#temp { font-size: 8.5rem; font-weight: 200; line-height: 1; margin: 0; }
+#cond { font-size: 1.4rem; opacity: .85; margin: 4px 0 0; }
+#hilo { font-size: 1.3rem; margin: 2px 0 20px; }
+
+.card {
+  background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.12);
+  backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+  border-radius: 22px; padding: 18px 32px; min-width: min(90vw, 420px);
+}
+#time { font-size: 3.2rem; font-weight: 600; margin: 0; letter-spacing: 1px; }
+#date { font-size: 1.2rem; opacity: .85; margin: 4px 0 0; }
+
+@media (max-width: 480px) {
+  #temp { font-size: 6.5rem; }
+  #time { font-size: 2.6rem; }
+}
